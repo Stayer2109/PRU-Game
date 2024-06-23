@@ -52,5 +52,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "TileGame-main.sln"
+    "dotnet.defaultSolution": "PRU-Game.sln"
 }
