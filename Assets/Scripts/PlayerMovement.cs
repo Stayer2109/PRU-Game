@@ -1,12 +1,21 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float runSpeed = 6f;
-    [SerializeField] float jumpSpeed = 15f;
-    [SerializeField] float climbSpeed = 6f;
-    [SerializeField] Vector2 deathKick = new Vector2(0f, 13f);
+    [SerializeField]
+    float runSpeed = 6f;
+
+    [SerializeField]
+    float jumpSpeed = 15f;
+
+    [SerializeField]
+    float climbSpeed = 6f;
+
+    [SerializeField]
+    Vector2 deathKick = new Vector2(0f, 13f);
 
     Vector2 moveInput;
     Rigidbody2D playerRigidBody;
@@ -16,6 +25,13 @@ public class PlayerMovement : MonoBehaviour
     float defaultGravity;
     bool isJumping = false;
     bool isAlive = true;
+    bool canDash = true;
+    bool isDashing = false;
+
+    [SerializeField]
+    float dashingPower = 24f;
+    float dashingTime = 0.2f;
+    float dashingCooldown = 1f;
 
     const float ZeroGravity = 0f;
 
@@ -34,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         if (FindObjectOfType<GameSession>().isPaused)
             return;
 
-        if (isAlive)
+        if (isAlive && !isDashing)
         {
             Run();
             FlipSprite();
@@ -47,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        if (isAlive)
+        if (isAlive && !isDashing)
             moveInput = value.Get<Vector2>();
     }
 
@@ -56,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         if (FindObjectOfType<GameSession>().isPaused)
             return;
 
-        if (isAlive)
+        if (isAlive && !isDashing)
         {
             if (IsTouchingGroundLayer() || IsTouchingClimbingLayer())
             {
@@ -64,6 +80,31 @@ public class PlayerMovement : MonoBehaviour
                 playerRigidBody.velocity += new Vector2(0f, jumpSpeed);
             }
         }
+    }
+
+    void OnDash(InputValue value)
+    {
+        int buildIndex = SceneManager.GetActiveScene().buildIndex;
+        if (isAlive && canDash && !isDashing && buildIndex != 0)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        float originalGravity = playerRigidBody.gravityScale;
+        playerRigidBody.gravityScale = ZeroGravity;
+        playerRigidBody.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
+
+        yield return new WaitForSeconds(dashingTime);
+        playerRigidBody.gravityScale = originalGravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
     }
 
     void Run()
@@ -84,7 +125,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsTouchingClimbingLayer() && !isJumping)
         {
-            Vector2 climbVelocity = new Vector2(playerRigidBody.velocity.x, (moveInput.y * climbSpeed));
+            Vector2 climbVelocity = new Vector2(
+                playerRigidBody.velocity.x,
+                (moveInput.y * climbSpeed)
+            );
 
             playerRigidBody.velocity = climbVelocity;
             playerRigidBody.gravityScale = ZeroGravity;
@@ -106,11 +150,11 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.SetTrigger("Dying");
             playerRigidBody.velocity = deathKick;
 
-            Invoke("DethProc", 1f);
+            Invoke("DeathProc", 1f);
         }
     }
 
-    void DethProc()
+    void DeathProc()
     {
         FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
@@ -137,6 +181,9 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsTouchingEnemyAndTrapLayer()
     {
-        return (playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap")) || playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap")));
+        return (
+            playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap"))
+            || playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap"))
+        );
     }
 }
