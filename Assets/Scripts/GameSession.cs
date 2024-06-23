@@ -4,11 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField]
-    int playerLives = 8;
-
-    [SerializeField]
-    int playerScore = 0;
+    [SerializeField] int playerLives = 8;
+    [SerializeField] int playerScore = 0;
+    [SerializeField] int level = 0;
 
     [SerializeField]
     TextMeshProUGUI livesText;
@@ -49,14 +47,18 @@ public class GameSession : MonoBehaviour
     {
         UpdateLivesText();
         UpdateScoreText();
-        UpdateLevelText();
+        SetLevel(level);
     }
 
     private void UpdateLevelText()
     {
-        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-        levelText.text = "Level : " + currentLevelIndex;
-        Debug.Log("Current level: " + currentLevelIndex);
+        levelText.text = "Level : " + level;
+    }
+
+    public void SetLevel(int levelIndex)
+    {
+        level = level == 0 ? SceneManager.GetActiveScene().buildIndex : levelIndex;
+        UpdateLevelText();
     }
 
     void OnExit()
@@ -74,8 +76,7 @@ public class GameSession : MonoBehaviour
 
     public void OnExitButtonClick()
     {
-        Destroy(gameObject);
-        SceneManager.LoadScene(0);
+        ResetSession();
     }
 
     public void ProcessPlayerDeath()
@@ -111,7 +112,7 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene(currentLevelIndex);
     }
 
-    void ResetSession()
+    public void ResetSession()
     {
         FindObjectOfType<LevelPersist>().ResetLevelPersist();
         SceneManager.LoadScene(0);

@@ -22,8 +22,11 @@ public class LevelExit : MonoBehaviour
         if (nextLevelIndex == SceneManager.sceneCountInBuildSettings)
             nextLevelIndex = 0;
 
+        if (nextLevelIndex == 4)
+            FindAnyObjectByType<GameSession>().ResetSession();
+
         FindObjectOfType<LevelPersist>().ResetLevelPersist();
-        FindObjectOfType<GameSession>().ResetPlayerLives();
+        FindObjectOfType<GameSession>().SetLevel(nextLevelIndex);
         SceneManager.LoadScene(nextLevelIndex);
     }
 }
