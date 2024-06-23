@@ -9,6 +9,7 @@ public class GameSession : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI livesText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI levelText;
 
     [SerializeField] GameObject statsCanvas;
     [SerializeField] GameObject menuCanvas;
@@ -25,19 +26,24 @@ public class GameSession : MonoBehaviour
             Destroy(gameObject);
         else
             DontDestroyOnLoad(gameObject);
-
-        ShowMenu();
     }
 
     void Start()
     {
         UpdateLivesText();
         UpdateScoreText();
+        UpdateLevelText();
+    }
+
+    private void UpdateLevelText()
+    {
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        levelText.text = "Level : " + currentLevelIndex;
+        Debug.Log("Current level: " + currentLevelIndex);
     }
 
     void OnExit()
     {
-
         if (!isPaused)
             ShowMenu();
         else
@@ -51,7 +57,9 @@ public class GameSession : MonoBehaviour
 
     public void OnExitButtonClick()
     {
-        Application.Quit();
+
+        Destroy(gameObject);
+        SceneManager.LoadScene(0);
     }
 
     public void ProcessPlayerDeath()
