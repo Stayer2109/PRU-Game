@@ -164,6 +164,12 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.SetTrigger("Dying");
             playerRigidBody.velocity = deathKick;
 
+            // Play the death sound
+            if (audioManagement != null && audioManagement._death != null)
+            {
+                audioManagement.PlaySFX(audioManagement._death);
+            }
+
             Invoke("DeathProc", 1f);
         }
     }
