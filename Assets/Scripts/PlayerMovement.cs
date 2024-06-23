@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Vector2 deathKick = new Vector2(0f, 13f);
 
+    [SerializeField]
+    float coyoteTime = 0.2f; // Duration of coyote time
+
     Vector2 moveInput;
     Rigidbody2D playerRigidBody;
     Animator playerAnimation;
@@ -27,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     bool isAlive = true;
     bool canDash = true;
     bool isDashing = false;
+    float coyoteTimeCounter;
 
     [SerializeField]
     float dashingPower = 24f;
@@ -57,6 +61,16 @@ public class PlayerMovement : MonoBehaviour
             ClimbLadder();
             Die();
 
+            // Update coyote time counter
+            if (IsTouchingGroundLayer() || IsTouchingClimbingLayer())
+            {
+                coyoteTimeCounter = coyoteTime;
+            }
+            else
+            {
+                coyoteTimeCounter -= Time.deltaTime;
+            }
+
             isJumping = false;
         }
     }
@@ -74,10 +88,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAlive && !isDashing)
         {
-            if (IsTouchingGroundLayer() || IsTouchingClimbingLayer())
+            if ((IsTouchingGroundLayer() || IsTouchingClimbingLayer() || coyoteTimeCounter > 0f) && value.isPressed)
             {
                 isJumping = true;
                 playerRigidBody.velocity += new Vector2(0f, jumpSpeed);
+                coyoteTimeCounter = 0f; // Reset coyote time counter after jumping
             }
         }
     }
