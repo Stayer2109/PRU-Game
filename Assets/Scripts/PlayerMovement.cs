@@ -182,8 +182,8 @@ public class PlayerMovement : MonoBehaviour
     bool IsTouchingEnemyAndTrapLayer()
     {
         return (
-            playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap"))
-            || playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap"))
+            playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap", "Water"))
+            || playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap", "Water"))
         );
     }
 }
