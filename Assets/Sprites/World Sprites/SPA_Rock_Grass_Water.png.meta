@@ -93,7 +93,7 @@ TextureImporter:
       213: 3747544219709766277
     second: SPA_Rock_Grass_Water_29
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -110,10 +110,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -122,9 +124,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -152,6 +154,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -163,6 +167,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -175,6 +180,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -820,9 +852,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      SPA_Rock_Grass_Water_0: -2464266514383608195
+      SPA_Rock_Grass_Water_1: -3326836957996475874
+      SPA_Rock_Grass_Water_10: -3493280607249542649
+      SPA_Rock_Grass_Water_11: -7832389824997676707
+      SPA_Rock_Grass_Water_12: 6972465368094823745
+      SPA_Rock_Grass_Water_13: -7671020578840251174
+      SPA_Rock_Grass_Water_14: 2766323726693326924
+      SPA_Rock_Grass_Water_15: -3503154757471595975
+      SPA_Rock_Grass_Water_16: -1667590691872097069
+      SPA_Rock_Grass_Water_17: -2488111991826676060
+      SPA_Rock_Grass_Water_18: -7175372319361646676
+      SPA_Rock_Grass_Water_19: -7647882774218309960
+      SPA_Rock_Grass_Water_2: -1236713991046615032
+      SPA_Rock_Grass_Water_20: -3542295685721467227
+      SPA_Rock_Grass_Water_21: -8076291029264883859
+      SPA_Rock_Grass_Water_22: -3487811798477773700
+      SPA_Rock_Grass_Water_23: -5134054752372163016
+      SPA_Rock_Grass_Water_24: 6192572789505845407
+      SPA_Rock_Grass_Water_25: -4897907173415269231
+      SPA_Rock_Grass_Water_26: 3803662930465603148
+      SPA_Rock_Grass_Water_27: -1076426586580465502
+      SPA_Rock_Grass_Water_28: -5576478142290952502
+      SPA_Rock_Grass_Water_29: 3747544219709766277
+      SPA_Rock_Grass_Water_3: 7323906098350758705
+      SPA_Rock_Grass_Water_4: -5972448355421142556
+      SPA_Rock_Grass_Water_5: -4977721373819348528
+      SPA_Rock_Grass_Water_6: 7953296568139915108
+      SPA_Rock_Grass_Water_7: 1958745200148787322
+      SPA_Rock_Grass_Water_8: 7799159119227759483
+      SPA_Rock_Grass_Water_9: -2755257858965140955
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
