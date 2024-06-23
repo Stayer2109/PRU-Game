@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     float dashingPower = 24f;
-    float dashingTime = 0.2f;
+    float dashingTime = 0.15f;
     float dashingCooldown = 1f;
 
     const float ZeroGravity = 0f;
@@ -91,8 +91,7 @@ public class PlayerMovement : MonoBehaviour
             if ((IsTouchingGroundLayer() || IsTouchingClimbingLayer() || coyoteTimeCounter > 0f) && value.isPressed)
             {
                 isJumping = true;
-                playerRigidBody.velocity += new Vector2(0f, jumpSpeed);
-                coyoteTimeCounter = 0f; // Reset coyote time counter after jumping
+                playerRigidBody.velocity += new Vector2(playerRigidBody.velocity.x, jumpSpeed);
             }
         }
     }
@@ -100,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     void OnDash(InputValue value)
     {
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
-        if (isAlive && canDash && !isDashing && buildIndex != 0)
+        if (isAlive && canDash && !isDashing && buildIndex > 1)
         {
             StartCoroutine(Dash());
         }
@@ -200,5 +199,10 @@ public class PlayerMovement : MonoBehaviour
             playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap", "Water"))
             || playerFeetCollider.IsTouchingLayers(LayerMask.GetMask("Enemy", "Trap", "Water"))
         );
+    }
+
+    bool IsTouchClimbLayer()
+    {
+        return playerBodyCollider.IsTouchingLayers(LayerMask.GetMask("Climbing"));
     }
 }
