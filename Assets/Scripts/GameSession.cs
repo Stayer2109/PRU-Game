@@ -1,20 +1,35 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 5;
-    [SerializeField] int playerScore = 0;
+    [SerializeField]
+    int playerLives = 8;
 
-    [SerializeField] TextMeshProUGUI livesText;
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField]
+    int playerScore = 0;
 
-    [SerializeField] GameObject statsCanvas;
-    [SerializeField] GameObject menuCanvas;
-    [SerializeField] GameObject playButton;
-    [SerializeField] GameObject exitButton;
+    [SerializeField]
+    TextMeshProUGUI livesText;
+
+    [SerializeField]
+    TextMeshProUGUI scoreText;
+
+    [SerializeField]
+    TextMeshProUGUI levelText;
+
+    [SerializeField]
+    GameObject statsCanvas;
+
+    [SerializeField]
+    GameObject menuCanvas;
+
+    [SerializeField]
+    GameObject playButton;
+
+    [SerializeField]
+    GameObject exitButton;
 
     public bool isPaused = true;
 
@@ -59,7 +74,6 @@ public class GameSession : MonoBehaviour
 
     public void OnExitButtonClick()
     {
-
         Destroy(gameObject);
         SceneManager.LoadScene(0);
     }
@@ -76,6 +90,12 @@ public class GameSession : MonoBehaviour
     {
         playerScore += 50;
         UpdateScoreText();
+    }
+
+    public void ResetPlayerLives()
+    {
+        playerLives = 8;
+        UpdateLivesText();
     }
 
     void TakeLife()

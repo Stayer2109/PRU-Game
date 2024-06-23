@@ -44,12 +44,6 @@ TagManager:
   - name: Background
     uniqueID: 246887481
     locked: 0
-  - name: Water
-    uniqueID: 301236845
-    locked: 0
-  - name: Platforms
-    uniqueID: 2415448613
-    locked: 0
   - name: Climbing
     uniqueID: 3824818989
     locked: 0
@@ -67,4 +61,13 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 138554293
+    locked: 0
+  - name: Water
+    uniqueID: 301236845
+    locked: 0
+  - name: Img
+    uniqueID: 3654556313
+    locked: 0
+  - name: Platforms
+    uniqueID: 2415448613
     locked: 0

@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class LevelExit : MonoBehaviour
 {
-    [SerializeField] float levelLoadDelay = 0.5f;
+    [SerializeField]
+    float levelLoadDelay = 0.5f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,6 +23,7 @@ public class LevelExit : MonoBehaviour
             nextLevelIndex = 0;
 
         FindObjectOfType<LevelPersist>().ResetLevelPersist();
+        FindObjectOfType<GameSession>().ResetPlayerLives();
         SceneManager.LoadScene(nextLevelIndex);
     }
 }
