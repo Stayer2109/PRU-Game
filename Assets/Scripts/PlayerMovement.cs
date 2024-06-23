@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     float coyoteTime = 0.2f; // Duration of coyote time
+    public AudioSource deathSound;
 
     Vector2 moveInput;
     Rigidbody2D playerRigidBody;
@@ -88,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAlive && !isDashing)
         {
-            if ((IsTouchingGroundLayer() || IsTouchingClimbingLayer() || coyoteTimeCounter > 0f) && value.isPressed)
+            if (
+                (IsTouchingGroundLayer() || IsTouchingClimbingLayer() || coyoteTimeCounter > 0f)
+                && value.isPressed
+            )
             {
                 isJumping = true;
                 playerRigidBody.velocity += new Vector2(playerRigidBody.velocity.x, jumpSpeed);
@@ -163,12 +167,7 @@ public class PlayerMovement : MonoBehaviour
             isAlive = false;
             playerAnimation.SetTrigger("Dying");
             playerRigidBody.velocity = deathKick;
-
-            // Play the death sound
-            if (audioManagement != null && audioManagement._death != null)
-            {
-                audioManagement.PlaySFX(audioManagement._death);
-            }
+            deathSound.Play();
 
             Invoke("DeathProc", 1f);
         }
