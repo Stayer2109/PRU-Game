@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject levelButtonPrefab; // Prefab for level buttons
     [SerializeField] private Transform levelButtonParent; // Parent transform for level buttons
     [SerializeField] private GameObject closeButton;
-
+    
     private void Start()
     {
         mainCanvas.SetActive(true); // Ensure main canvas is visible
@@ -30,6 +30,7 @@ public class MainMenu : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Play button clicked");
+        mainCanvas.SetActive(false);
         SceneManager.LoadScene(1);
     }
 

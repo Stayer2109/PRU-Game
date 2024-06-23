@@ -26,6 +26,8 @@ public class GameSession : MonoBehaviour
             Destroy(gameObject);
         else
             DontDestroyOnLoad(gameObject);
+
+        isPaused = false;
     }
 
     void Start()
