@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Vector2 deathKick = new Vector2(0f, 13f);
 
-    [SerializeField]
     float coyoteTime = 0.2f; // Duration of coyote time
+    float coyoteTimeCounter;
     public AudioSource deathSound;
 
     Vector2 moveInput;
@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
     bool isAlive = true;
     bool canDash = true;
     bool isDashing = false;
-    float coyoteTimeCounter;
 
     [SerializeField]
     float dashingPower = 24f;
@@ -63,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
             Die();
 
             // Update coyote time counter
-            if (IsTouchingGroundLayer() || IsTouchingClimbingLayer())
+            if (IsTouchingGroundLayer())
             {
                 coyoteTimeCounter = coyoteTime;
             }
@@ -72,44 +71,53 @@ public class PlayerMovement : MonoBehaviour
                 coyoteTimeCounter -= Time.deltaTime;
             }
 
-            isJumping = false;
+            isJumping = false; // Reset isJumping when grounded
         }
     }
 
-    void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
         if (isAlive && !isDashing)
-            moveInput = value.Get<Vector2>();
+            moveInput = context.ReadValue<Vector2>();
     }
 
-    void OnJump(InputValue value)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (FindObjectOfType<GameSession>().isPaused)
             return;
 
         if (isAlive && !isDashing)
         {
-            if (
-                (IsTouchingGroundLayer() || IsTouchingClimbingLayer() || coyoteTimeCounter > 0f)
-                && value.isPressed
-            )
+            if (context.performed && coyoteTimeCounter > 0f)
             {
                 isJumping = true;
-                playerRigidBody.velocity += new Vector2(playerRigidBody.velocity.x, jumpSpeed);
+                playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, jumpSpeed);
+            }
+
+            if (context.canceled && playerRigidBody.velocity.y > 0f)
+            {
+                playerRigidBody.velocity = new Vector2(
+                    playerRigidBody.velocity.x,
+                    playerRigidBody.velocity.y * 0.5f
+                );
+                coyoteTimeCounter = 0f;
             }
         }
     }
 
-    void OnDash(InputValue value)
+    public void OnDash(InputAction.CallbackContext context)
     {
-        int buildIndex = SceneManager.GetActiveScene().buildIndex;
-        if (isAlive && canDash && !isDashing && buildIndex > 1)
+        if (context.performed)
         {
-            StartCoroutine(Dash());
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+            if (isAlive && canDash && !isDashing && buildIndex > 1)
+            {
+                StartCoroutine(Dash());
+            }
         }
     }
 
-    IEnumerator Dash()
+    public IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
@@ -127,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Run()
     {
-        Vector2 playerVelocity = new Vector2((moveInput.x * runSpeed), playerRigidBody.velocity.y);
+        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, playerRigidBody.velocity.y);
         playerRigidBody.velocity = playerVelocity;
 
         playerAnimation.SetBool("isRunning", HasHorizontalSpeed());
@@ -145,7 +153,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 climbVelocity = new Vector2(
                 playerRigidBody.velocity.x,
-                (moveInput.y * climbSpeed)
+                moveInput.y * climbSpeed
             );
 
             playerRigidBody.velocity = climbVelocity;
