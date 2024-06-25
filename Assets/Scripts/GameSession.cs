@@ -4,9 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] int playerLives = 8;
-    [SerializeField] int playerScore = 0;
-    [SerializeField] int level = 0;
+    [SerializeField]
+    int playerLives = 8;
+
+    [SerializeField]
+    int playerScore = 0;
+
+    [SerializeField]
+    int level = 0;
 
     [SerializeField]
     TextMeshProUGUI livesText;
@@ -29,6 +34,9 @@ public class GameSession : MonoBehaviour
     [SerializeField]
     GameObject exitButton;
 
+    public Vector2 lastCheckpointPos;
+    private PlayerPos playerPos;
+
     public bool isPaused = true;
 
     void Awake()
@@ -36,9 +44,13 @@ public class GameSession : MonoBehaviour
         int gameSessionsCount = FindObjectsOfType<GameSession>().Length;
 
         if (gameSessionsCount > 1)
+        {
             Destroy(gameObject);
+        }
         else
+        {
             DontDestroyOnLoad(gameObject);
+        }
 
         isPaused = false;
     }
@@ -64,9 +76,13 @@ public class GameSession : MonoBehaviour
     void OnExit()
     {
         if (!isPaused)
+        {
             ShowMenu();
+        }
         else
+        {
             CloseMenu();
+        }
     }
 
     public void OnPlayButtonClick()
@@ -82,9 +98,13 @@ public class GameSession : MonoBehaviour
     public void ProcessPlayerDeath()
     {
         if (playerLives > 1)
+        {
             TakeLife();
+        }
         else
+        {
             ResetSession();
+        }
     }
 
     public void ProcessPlayerScore()
@@ -109,6 +129,7 @@ public class GameSession : MonoBehaviour
     void ReloadCurrentLevel()
     {
         int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        ResetPlayerPos();
         SceneManager.LoadScene(currentLevelIndex);
     }
 
@@ -141,5 +162,10 @@ public class GameSession : MonoBehaviour
         isPaused = false;
         statsCanvas.SetActive(true);
         menuCanvas.SetActive(false);
+    }
+
+    void ResetPlayerPos()
+    {
+        playerPos = FindObjectOfType<PlayerPos>();
     }
 }

@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 1435459620222191882}
   - component: {fileID: 3739015530651434612}
   - component: {fileID: 140804763}
+  - component: {fileID: 2770695766642472052}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -291,6 +292,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 33ad7562-5465-4ed6-b04f-b2870c0c69d7
     m_ActionName: UI/Exit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2770695766642472052}
+        m_TargetAssemblyTypeName: PlayerPos, Assembly-CSharp
+        m_MethodName: OnResetPos
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 812ad720-19b6-434b-a20f-8a6224f92b7f
+    m_ActionName: Player/ResetPos[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -359,6 +376,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4582224, y: 0.0939312}
   m_EdgeRadius: 0
+--- !u!114 &2770695766642472052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435459620050866079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19343ffd93c29f4f94b822d2c80e9dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3507496249805519906
 GameObject:
   m_ObjectHideFlags: 0
