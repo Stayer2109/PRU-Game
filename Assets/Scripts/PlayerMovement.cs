@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     float coyoteTime = 0.2f; // Duration of coyote time
     float coyoteTimeCounter;
     public AudioSource deathSound;
+    private PlayerPos playerPos;
 
     Vector2 moveInput;
     Rigidbody2D playerRigidBody;
@@ -45,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         playerAnimation = GetComponent<Animator>();
         playerBodyCollider = GetComponent<CapsuleCollider2D>();
         playerFeetCollider = GetComponent<BoxCollider2D>();
+        playerPos = GetComponent<PlayerPos>();
 
         defaultGravity = playerRigidBody.gravityScale;
     }

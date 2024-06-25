@@ -1,19 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject mainCanvas; // Reference to the main canvas
-    [SerializeField] private GameObject playButton;
-    [SerializeField] private GameObject chooseLevelButton;
-    [SerializeField] private GameObject exitButton;
-    [SerializeField] private GameObject levelSelectionPanel; // Reference to the level selection canvas
-    [SerializeField] private GameObject levelButtonPrefab; // Prefab for level buttons
-    [SerializeField] private Transform levelButtonParent; // Parent transform for level buttons
-    [SerializeField] private GameObject closeButton;
+    [SerializeField]
+    private GameObject mainCanvas; // Reference to the main canvas
+
+    [SerializeField]
+    private GameObject playButton;
+
+    [SerializeField]
+    private GameObject chooseLevelButton;
+
+    [SerializeField]
+    private GameObject exitButton;
+
+    [SerializeField]
+    private GameObject levelSelectionPanel; // Reference to the level selection canvas
+
+    [SerializeField]
+    private GameObject levelButtonPrefab; // Prefab for level buttons
+
+    [SerializeField]
+    private Transform levelButtonParent; // Parent transform for level buttons
+
+    [SerializeField]
+    private GameObject closeButton;
 
     private void Start()
     {
@@ -22,27 +37,27 @@ public class MainMenu : MonoBehaviour
 
         // Add listeners to buttons
         playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(StartGame);
-        chooseLevelButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(ShowLevelSelection);
+        chooseLevelButton
+            .GetComponent<UnityEngine.UI.Button>()
+            .onClick.AddListener(ShowLevelSelection);
         exitButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(ExitGame);
         closeButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(CloseLevelSelection);
     }
 
     public void StartGame()
     {
-        Debug.Log("Play button clicked");
         mainCanvas.SetActive(false);
-        SceneManager.LoadScene(1);
+        int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        SceneManager.LoadScene(nextLevelIndex);
     }
 
     public void ExitGame()
     {
-        Debug.Log("Exit button clicked");
         Application.Quit();
     }
 
     public void ShowLevelSelection()
     {
-        Debug.Log("Choose Level button clicked");
         levelSelectionPanel.SetActive(true);
     }
 
@@ -54,7 +69,6 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevel(int index)
     {
-        Debug.Log("Loading level: " + index);
         SceneManager.LoadScene(index);
     }
 }

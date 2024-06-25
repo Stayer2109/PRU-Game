@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GameSession
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Trap
   - Exit
   - Coin
-  - 
+  - Checkpoint
   - 
   - 
   - 
@@ -70,4 +71,7 @@ TagManager:
     locked: 0
   - name: Platforms
     uniqueID: 2415448613
+    locked: 0
+  - name: Checkpoint
+    uniqueID: 2553710735
     locked: 0

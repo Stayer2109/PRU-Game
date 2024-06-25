@@ -1272,7 +1272,7 @@ GameObject:
   - component: {fileID: 5070885308010601159}
   m_Layer: 0
   m_Name: Game Session
-  m_TagString: Untagged
+  m_TagString: GameSession
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1309,6 +1309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLives: 8
   playerScore: 0
+  level: 0
   livesText: {fileID: 1680883973}
   scoreText: {fileID: 1196451676}
   levelText: {fileID: 1746900458196170598}
@@ -1316,6 +1317,7 @@ MonoBehaviour:
   menuCanvas: {fileID: 1108142045}
   playButton: {fileID: 209741861}
   exitButton: {fileID: 366736466}
+  lastCheckpointPos: {x: 0, y: 0}
   isPaused: 1
 --- !u!114 &5070885308010601159
 MonoBehaviour:
