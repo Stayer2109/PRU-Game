@@ -1318,6 +1318,7 @@ MonoBehaviour:
   playButton: {fileID: 209741861}
   exitButton: {fileID: 366736466}
   lastCheckpointPos: {x: 0, y: 0}
+  playerPos: {fileID: 2770695766642472052, guid: bb260044cefdfcc489ed8b9d7db13877, type: 3}
   isPaused: 1
 --- !u!114 &5070885308010601159
 MonoBehaviour:
