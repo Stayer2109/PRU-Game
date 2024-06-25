@@ -8,10 +8,9 @@ public class PlayerPos : MonoBehaviour
 {
     private GameSession gs;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        gs = FindObjectOfType<GameSession>();
+        gs = GameObject.FindGameObjectWithTag("GameSession").GetComponent<GameSession>();
         ResetPos();
     }
 
@@ -20,9 +19,20 @@ public class PlayerPos : MonoBehaviour
         if (gs != null)
         {
             if (gs.lastCheckpointPos == Vector2.zero)
+            {
                 return;
+            }
 
             transform.position = gs.lastCheckpointPos;
+        }
+    }
+
+    public void SetPos(Vector2 pos)
+    {
+        gs = FindObjectOfType<GameSession>();
+        if (gs != null)
+        {
+            gs.lastCheckpointPos = pos;
         }
     }
 }

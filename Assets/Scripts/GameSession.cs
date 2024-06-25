@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameSession : MonoBehaviour
 {
     [SerializeField]
-    int playerLives = 8;
+    public int playerLives = 8;
 
     [SerializeField]
     int playerScore = 0;
@@ -35,21 +36,20 @@ public class GameSession : MonoBehaviour
     GameObject exitButton;
 
     public Vector2 lastCheckpointPos;
-    private PlayerPos playerPos;
-
+    public PlayerPos playerPos;
     public bool isPaused = true;
+    private static GameSession instance;
 
     void Awake()
     {
-        int gameSessionsCount = FindObjectsOfType<GameSession>().Length;
-
-        if (gameSessionsCount > 1)
+        if (instance == null)
         {
-            Destroy(gameObject);
+            instance = this;
+            DontDestroyOnLoad(instance);
         }
         else
         {
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
         }
 
         isPaused = false;
@@ -128,9 +128,8 @@ public class GameSession : MonoBehaviour
 
     void ReloadCurrentLevel()
     {
-        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         ResetPlayerPos();
-        SceneManager.LoadScene(currentLevelIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ResetSession()
@@ -166,6 +165,9 @@ public class GameSession : MonoBehaviour
 
     void ResetPlayerPos()
     {
-        playerPos = FindObjectOfType<PlayerPos>();
+        if (playerPos == null)
+        {
+            playerPos = FindObjectOfType<PlayerPos>();
+        }
     }
 }

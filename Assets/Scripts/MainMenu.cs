@@ -30,10 +30,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject closeButton;
 
+    private GameSession gs;
+
     private void Start()
     {
         mainCanvas.SetActive(true); // Ensure main canvas is visible
         levelSelectionPanel.SetActive(false); // Ensure level selection canvas is hidden initially
+        gs = FindAnyObjectByType<GameSession>();
 
         // Add listeners to buttons
         playButton.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(StartGame);
@@ -48,6 +51,7 @@ public class MainMenu : MonoBehaviour
     {
         mainCanvas.SetActive(false);
         int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
         SceneManager.LoadScene(nextLevelIndex);
     }
 

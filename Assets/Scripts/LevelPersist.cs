@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class LevelPersist : MonoBehaviour
 {
+    private static LevelPersist instance;
     void Awake()
     {
-        int levelPersistsCount = FindObjectsOfType<LevelPersist>().Length;
+        // int levelPersistsCount = FindObjectsOfType<LevelPersist>().Length;
 
-        if (levelPersistsCount > 1)
-            Destroy(gameObject);
+        // if (levelPersistsCount > 1)
+        //     Destroy(gameObject);
+        // else
+        //     DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
         else
-            DontDestroyOnLoad(gameObject);
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void ResetLevelPersist()

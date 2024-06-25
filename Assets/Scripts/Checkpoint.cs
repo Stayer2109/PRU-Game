@@ -7,9 +7,9 @@ public class Checkpoint : MonoBehaviour
     private GameSession gs;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        gs = FindObjectOfType<GameSession>();
+        gs = GameObject.FindGameObjectWithTag("GameSession").GetComponent<GameSession>();
     }
 
     // Update is called once per frame
@@ -17,8 +17,8 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Destroy(gameObject);
             gs.lastCheckpointPos = transform.position;
+            Destroy(gameObject);
         }
     }
 }
