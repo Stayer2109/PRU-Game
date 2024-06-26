@@ -5,35 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField]
-    public int playerLives = 8;
+    [SerializeField] public int playerLives = 8;
 
-    [SerializeField]
-    int playerScore = 0;
+    [SerializeField] int playerScore = 0;
 
-    [SerializeField]
-    int level = 0;
+    [SerializeField] int level = 0;
 
-    [SerializeField]
-    TextMeshProUGUI livesText;
+    [SerializeField] TextMeshProUGUI livesText;
 
-    [SerializeField]
-    TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI scoreText;
 
-    [SerializeField]
-    TextMeshProUGUI levelText;
+    [SerializeField] TextMeshProUGUI levelText;
 
-    [SerializeField]
-    GameObject statsCanvas;
+    [SerializeField] GameObject statsCanvas;
 
-    [SerializeField]
-    GameObject menuCanvas;
+    [SerializeField] GameObject menuCanvas;
 
-    [SerializeField]
-    GameObject playButton;
+    [SerializeField] GameObject gameoverCanvas;
 
-    [SerializeField]
-    GameObject exitButton;
+    [SerializeField] GameObject playButton;
+
+    [SerializeField] GameObject restartButton;
+
+    [SerializeField] GameObject exitButton;
 
     public Vector2 lastCheckpointPos;
     public PlayerPos playerPos;
@@ -95,6 +89,11 @@ public class GameSession : MonoBehaviour
         ResetSession();
     }
 
+    public void OnRestartButtonClick()
+    {
+        RestartGame();
+    }
+
     public void ProcessPlayerDeath()
     {
         if (playerLives > 1)
@@ -103,7 +102,7 @@ public class GameSession : MonoBehaviour
         }
         else
         {
-            ResetSession();
+            ShowGameOver();
         }
     }
 
@@ -169,5 +168,23 @@ public class GameSession : MonoBehaviour
         {
             playerPos = FindObjectOfType<PlayerPos>();
         }
+    }
+
+    public void ShowGameOver()
+    {
+        isPaused = true;
+        statsCanvas.SetActive(false);
+        gameoverCanvas.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        FindObjectOfType<LevelPersist>().ResetLevelPersist();
+        Destroy(gameObject);
+        ResetPlayerLives();
+        isPaused = false;
+        statsCanvas.SetActive(true);
+        gameoverCanvas.SetActive(false);
+        ReloadCurrentLevel();
     }
 }
