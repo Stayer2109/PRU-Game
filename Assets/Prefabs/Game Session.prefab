@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Paused
+  m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2bc673d9e1a897246b544c0ee8fff0ce, type: 2}
   m_sharedMaterial: {fileID: 4970755539859641708, guid: 2bc673d9e1a897246b544c0ee8fff0ce, type: 2}
