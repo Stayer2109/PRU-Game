@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelExit : MonoBehaviour
 {
     [SerializeField]
-    float levelLoadDelay = 0.5f;
+    float levelLoadDelay = 0.25f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,10 +25,11 @@ public class LevelExit : MonoBehaviour
         if (nextLevelIndex == 4)
             FindAnyObjectByType<GameSession>().ResetSession();
 
-        FindObjectOfType<LevelPersist>().ResetLevelPersist();
+        FindAnyObjectByType<LevelPersist>().ResetLevelPersist();
         FindObjectOfType<GameSession>().SetLevel(nextLevelIndex);
         FindObjectOfType<GameSession>().ResetPlayerLives();
         FindObjectOfType<PlayerPos>().SetPos(new Vector2(0, 0));
+        FindObjectOfType<GameSession>().OnNextLevelProceed();
         SceneManager.LoadScene(nextLevelIndex);
     }
 }

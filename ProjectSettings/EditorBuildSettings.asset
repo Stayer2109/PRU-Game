@@ -9,10 +9,13 @@ EditorBuildSettings:
     path: Assets/UI/Main Menu.unity
     guid: 6b413a5f658e7ae42a35981f0f7f2ed8
   - enabled: 1
+    path: Assets/Levels/Tutorial.unity
+    guid: 0eec1c0b631076f418ad4f3297c2021b
+  - enabled: 1
     path: Assets/Levels/Game Level 1.unity
     guid: defe41dd30a35c7418eec9920894b57d
   - enabled: 1
-    path: Assets/Levels/Game level 2.unity
+    path: Assets/Levels/Game Level 2.unity
     guid: 3b9bf056e7471c345b47046848fcb16e
   - enabled: 1
     path: Assets/Levels/Game Level 3.unity

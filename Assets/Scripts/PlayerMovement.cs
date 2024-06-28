@@ -112,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed)
         {
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
-            if (isAlive && canDash && !isDashing && buildIndex > 1)
+            if (isAlive && canDash && !isDashing && buildIndex > 2)
             {
                 StartCoroutine(Dash());
             }
