@@ -5,29 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] public int playerLives = 8;
+    [SerializeField]
+    public int playerLives = 8;
 
-    [SerializeField] int playerScore = 0;
+    [SerializeField]
+    int playerScore = 0;
 
-    [SerializeField] int level = 0;
+    [SerializeField]
+    int level = 0;
 
-    [SerializeField] TextMeshProUGUI livesText;
+    [SerializeField]
+    TextMeshProUGUI livesText;
 
-    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField]
+    TextMeshProUGUI scoreText;
 
-    [SerializeField] TextMeshProUGUI levelText;
+    [SerializeField]
+    TextMeshProUGUI levelText;
 
-    [SerializeField] GameObject statsCanvas;
+    [SerializeField]
+    GameObject statsCanvas;
 
-    [SerializeField] GameObject menuCanvas;
+    [SerializeField]
+    GameObject menuCanvas;
 
-    [SerializeField] GameObject gameoverCanvas;
+    [SerializeField]
+    GameObject gameoverCanvas;
 
-    [SerializeField] GameObject playButton;
+    [SerializeField]
+    GameObject playButton;
 
-    [SerializeField] GameObject restartButton;
+    [SerializeField]
+    GameObject restartButton;
 
-    [SerializeField] GameObject exitButton;
+    [SerializeField]
+    GameObject exitButton;
 
     public Vector2 lastCheckpointPos;
     public PlayerPos playerPos;
@@ -51,6 +63,7 @@ public class GameSession : MonoBehaviour
 
     void Start()
     {
+        checkIsTutorial();
         UpdateLivesText();
         UpdateScoreText();
         SetLevel(level);
@@ -158,7 +171,8 @@ public class GameSession : MonoBehaviour
     void CloseMenu()
     {
         isPaused = false;
-        statsCanvas.SetActive(true);
+        if (!IsTutorial())
+            statsCanvas.SetActive(true);
         menuCanvas.SetActive(false);
     }
 
@@ -186,5 +200,28 @@ public class GameSession : MonoBehaviour
         statsCanvas.SetActive(true);
         gameoverCanvas.SetActive(false);
         ReloadCurrentLevel();
+    }
+
+    bool IsTutorial()
+    {
+        return SceneManager.GetActiveScene().buildIndex == 1;
+    }
+
+    public void checkIsTutorial()
+    {
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        if (IsTutorial())
+        {
+            statsCanvas.SetActive(false);
+        }
+        else
+        {
+            statsCanvas.SetActive(true);
+        }
+    }
+
+    public void OnNextLevelProceed()
+    {
+        checkIsTutorial();
     }
 }

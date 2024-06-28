@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameSession
+  - ResetPlatform
+  - ResetFullPlatform
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Exit
   - Coin
   - Checkpoint
-  - 
+  - ResetTile
   - 
   - 
   - 
@@ -60,6 +62,9 @@ TagManager:
   - name: Coin
     uniqueID: 3451945957
     locked: 0
+  - name: Prototype
+    uniqueID: 1462745907
+    locked: 0
   - name: Player
     uniqueID: 138554293
     locked: 0
@@ -74,4 +79,7 @@ TagManager:
     locked: 0
   - name: Checkpoint
     uniqueID: 2553710735
+    locked: 0
+  - name: Text Ingame
+    uniqueID: 1211593969
     locked: 0
