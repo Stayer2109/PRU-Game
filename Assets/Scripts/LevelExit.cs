@@ -29,7 +29,6 @@ public class LevelExit : MonoBehaviour
         FindObjectOfType<GameSession>().SetLevel(nextLevelIndex);
         FindObjectOfType<GameSession>().ResetPlayerLives();
         FindObjectOfType<PlayerPos>().SetPos(new Vector2(0, 0));
-        FindObjectOfType<GameSession>().OnNextLevelProceed();
         SceneManager.LoadScene(nextLevelIndex);
     }
 }
