@@ -1,3 +1,4 @@
+using System.Collections;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
@@ -22,6 +23,9 @@ public class GameSession : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI levelText;
+
+    [SerializeField]
+    GameObject dashNotification;
 
     [SerializeField]
     GameObject statsCanvas;
@@ -67,6 +71,46 @@ public class GameSession : MonoBehaviour
         UpdateLivesText();
         UpdateScoreText();
         SetLevel(level);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // disable after 1s
+        if (dashNotification != null)
+        {
+            StartCoroutine(DisableDashNotificationAfterDelay());
+        }
+    }
+    IEnumerator DisableDashNotificationAfterDelay()
+    {
+        yield return new WaitForSeconds(5f); // Wait for 1 second
+
+        // Disable dashNotification
+        dashNotification.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex != 1)  // Assuming buildIndex 1 is the tutorial
+        {
+            statsCanvas.SetActive(true);
+        }
+        else
+        {
+            statsCanvas.SetActive(false);
+        }
+
+        ResetPlayerPos();
+        UpdateLivesText();
+        UpdateScoreText();
+        SetLevel(scene.buildIndex);
     }
 
     private void UpdateLevelText()
@@ -218,10 +262,5 @@ public class GameSession : MonoBehaviour
         {
             statsCanvas.SetActive(true);
         }
-    }
-
-    public void OnNextLevelProceed()
-    {
-        checkIsTutorial();
     }
 }

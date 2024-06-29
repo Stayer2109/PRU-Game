@@ -199,6 +199,17 @@
                 },
                 {
                     "name": "",
+                    "id": "7709f6d4-37f2-441d-9fa2-8846b6fbb7c1",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "274a21e4-e680-4502-addb-77e13983bc27",
                     "path": "<Keyboard>/r",
                     "interactions": "",
