@@ -120,7 +120,7 @@ public class GameSession : MonoBehaviour
 
     public void SetLevel(int levelIndex)
     {
-        level = level == 0 ? SceneManager.GetActiveScene().buildIndex : levelIndex;
+        level = level == 0 ? SceneManager.GetActiveScene().buildIndex : levelIndex - 1;
         UpdateLevelText();
     }
 
