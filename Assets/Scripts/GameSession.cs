@@ -246,7 +246,7 @@ public class GameSession : MonoBehaviour
         ReloadCurrentLevel();
     }
 
-    bool IsTutorial()
+    public bool IsTutorial()
     {
         return SceneManager.GetActiveScene().buildIndex == 1;
     }
