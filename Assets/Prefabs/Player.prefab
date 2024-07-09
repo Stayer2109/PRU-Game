@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3739015530651434612}
   - component: {fileID: 140804763}
   - component: {fileID: 2770695766642472052}
+  - component: {fileID: 8399747326011803936}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -345,7 +346,6 @@ MonoBehaviour:
   jumpSpeed: 15
   climbSpeed: 8
   deathKick: {x: 0, y: 99}
-  holdDuration: 1
   deathSound: {fileID: 4592107238929340365}
   dashingPower: 12
 --- !u!61 &140804763
@@ -405,6 +405,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19343ffd93c29f4f94b822d2c80e9dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8399747326011803936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435459620050866079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c90f0281f85df7e42b4e725e6329e479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdDuration: 1.2
+  slider: {fileID: 0}
 --- !u!1 &3507496249805519906
 GameObject:
   m_ObjectHideFlags: 0
