@@ -311,8 +311,8 @@ MonoBehaviour:
     m_ActionName: Player/ResetPos[/Keyboard/r]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3739015530651434612}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 8399747326011803936}
+        m_TargetAssemblyTypeName: PlayerAction, Assembly-CSharp
         m_MethodName: OnHold
         m_Mode: 0
         m_Arguments:
@@ -418,7 +418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdDuration: 1.2
-  slider: {fileID: 0}
 --- !u!1 &3507496249805519906
 GameObject:
   m_ObjectHideFlags: 0

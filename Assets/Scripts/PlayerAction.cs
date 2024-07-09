@@ -12,11 +12,14 @@ public class PlayerAction : MonoBehaviour
 
     [SerializeField]
     float holdDuration = 1.2f;
-    public Slider slider;
+    private Slider slider;
     private float holdTimer = 0;
     bool isHolding = false;
 
-    void Start() { }
+    void Start()
+    {
+        slider = FindObjectOfType<Slider>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,7 +27,7 @@ public class PlayerAction : MonoBehaviour
         if (isHolding)
         {
             GameSession gs = FindObjectOfType<GameSession>();
-            if (!slider.gameObject && gs.IsTutorial())
+            if (!slider && gs.IsTutorial())
                 return;
 
             // set slider opacity
@@ -32,6 +35,7 @@ public class PlayerAction : MonoBehaviour
 
             holdTimer += Time.deltaTime;
             slider.value = holdTimer / holdDuration;
+            
             if (holdTimer >= holdDuration)
             {
                 // get session and load next level
@@ -53,6 +57,10 @@ public class PlayerAction : MonoBehaviour
         }
         else if (context.canceled)
         {
+            // check if slider is null
+            if (!slider)
+                return;
+
             slider.gameObject.SetActive(false);
             ResetHold();
         }
