@@ -18,9 +18,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Vector2 deathKick = new Vector2(0f, 13f);
 
-    [SerializeField]
-    float holdDuration = 1f;
-
     float coyoteTime = 0.2f; // Duration of coyote time
     float coyoteTimeCounter;
     public AudioSource deathSound;
@@ -36,8 +33,6 @@ public class PlayerMovement : MonoBehaviour
     bool isAlive = true;
     bool canDash = true;
     bool isDashing = false;
-    bool isHolding = false;
-    private float holdTimer = 0;
 
     [SerializeField]
     float dashingPower = 24f;
@@ -81,25 +76,6 @@ public class PlayerMovement : MonoBehaviour
 
             isJumping = false; // Reset isJumping when grounded
         }
-
-        if (isHolding)
-        {
-            holdTimer += Time.deltaTime;
-            if (holdTimer >= holdDuration)
-            {
-                // get session and load next level
-                GameSession gs = FindObjectOfType<GameSession>();
-                if (gs.IsTutorial())
-                {
-                    int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-                    int nextLevelIndex = currentLevelIndex + 1;
-                    gs.SetLevel(nextLevelIndex);
-                    gs.ResetPlayerLives();
-                    gs.ResetSession();
-                    SceneManager.LoadScene(nextLevelIndex);
-                }
-            }
-        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -142,25 +118,6 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine(Dash());
             }
         }
-    }
-
-    public void OnHold(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            isHolding = true;
-        }
-
-        else if (context.canceled)
-        {
-            ResetHold();
-        }
-    }
-
-    private void ResetHold()
-    {
-        isHolding = false;
-        holdTimer = 0;
     }
 
     public IEnumerator Dash()
